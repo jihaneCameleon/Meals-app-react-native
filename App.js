@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useState} from 'react';
+import * as Font from 'expo-font';
+import CategoriesScreen from './screens/CategoriesScreen';
+import AppLoading from 'expo-app-loading';
+import MealsNavigator from './navigation/MealsNavigator';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const fetchFonts=()=>{
+  Font.loadAsync({
+     'anton':require('./assets/Fonts/Anton-Regular.ttf'),
+     'sen-regular':require('./assets/Fonts/Sen-Bold.ttf'),
+     'sen-bold':require('./assets/Fonts/Sen-Regular.ttf'),
+  })
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+
+  const[fontLoaded,setFontLoaded]=useState(false);
+  
+  if(!fontLoaded){
+
+    return(
+        <AppLoading
+            startAsync={fetchFonts}
+            onFinish={() => setFontLoaded(true)}
+            onError={(err) => console.log(err)}
+        />
+    );
+  }
+  
+  return (
+      
+    <MealsNavigator/>
+
+      
+  );
+}
