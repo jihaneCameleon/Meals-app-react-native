@@ -32,7 +32,8 @@ const styles=StyleSheet.create({
         margin:15,
         height:150,
         borderRadius:10,
-        overflow:'hidden'
+        overflow:Platform.OS=== 'android' && Platform.Version>=2 ? 'hidden' :'visible',
+        elevation:5,
     },
     container:{
         flex:1,

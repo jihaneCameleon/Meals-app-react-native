@@ -8,7 +8,7 @@ const MealItem = props=>{
     return(
 
             <View>
-                <TouchableOpacity style={styles.mealItem}>
+                <TouchableOpacity style={styles.mealItem} onPress={props.onSelectMeal}>
                     <View style={{...styles.mealRow,...styles.mealHeader}} >
                         <ImageBackground source={{uri:props.image}} style={styles.bgImage}  >
                         <Text style={styles.title} numberOfLines={1}>
