@@ -1,4 +1,5 @@
 import React from 'react';
+import {Text} from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -76,7 +77,9 @@ const tabScreenConfig={
         navigationOptions:{
             tabBarIcon:(tabInfo)=>{
                 return <Ionicons name='ios-restaurant' size={25} color={tabInfo.tintColor} />
-            }
+            },
+            tabBarLabel:<Text style={{fontFamily:'sen-bold'}}>Meals</Text>
+
         }
     },
     Favorites:{
@@ -85,7 +88,8 @@ const tabScreenConfig={
             tabBarIcon:(tabInfo)=>{
                 return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.secondaryColor
+            tabBarColor: Colors.secondaryColor,
+            tabBarLabel:<Text style={{fontFamily:'sen-bold'}}>Favorites</Text>
         }
             
     
@@ -113,14 +117,36 @@ createBottomTabNavigator (tabScreenConfig,
 )
 
 
-const FiltersNavigator = createStackNavigator({
+const FiltersNavigator = createStackNavigator(
+    {
     Filters:FiltersScreen
-})
+    },
+    {
+        mode:'modal',
+        defaultNavigationOptions: defaultStackNavOptions
+    }
+)
 
 
 const MainNavigator=createDrawerNavigator({
-    MealsFavs:MealsFavTabNavigator,
+    MealsFavs:{
+        screen:MealsFavTabNavigator,
+        navigationOptions:{
+            drawerLabel:'Meals',
+            drawerIcon:<Ionicons color={Colors.primaryColor} name="ios-restaurant" />
+        }
+    },
     Filters:FiltersNavigator
-})
+
+},
+{
+    contentOptions:{
+        activeTintColor:Colors.primaryColor,
+        labelStyle:{
+            fontFamily:'sen-bold',
+        }
+    }
+}
+)
 
 export default createAppContainer(MainNavigator);
