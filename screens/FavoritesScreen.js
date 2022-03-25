@@ -21,7 +21,7 @@ const FavoritesScreen = props =>{
         
     
 
-}
+}   
 
 FavoritesScreen.navigationOptions=navData=>{
     return{
